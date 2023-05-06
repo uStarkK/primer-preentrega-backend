@@ -1,0 +1,64 @@
+[
+  {
+    "title": "Calzones",
+    "price": 25,
+    "thumbnail": "url.com/url",
+    "code": "aaj",
+    "id": 1,
+    "desc": "A good pair of calzones",
+    "status": true,
+    "stock": 520,
+    "category": "clothes"
+  },
+  {
+    "title": "Camiseta",
+    "price": 30,
+    "thumbnail": "url.com/url",
+    "code": "aac",
+    "id": 2
+  },
+  {
+    "title": "Esponja",
+    "price": 320,
+    "thumbnail": "url.com/url",
+    "code": "aad",
+    "id": 3
+  },
+  {
+    "title": "Pelota",
+    "price": 120,
+    "thumbnail": "url.com/url",
+    "code": "aae",
+    "id": 4
+  },
+  {
+    "title": "campera",
+    "price": 129,
+    "code": "aaa",
+    "desc": "A little campera",
+    "status": true,
+    "stock": 2,
+    "category": "Clothes",
+    "id": 5
+  },
+  {
+    "title": "Camioneta",
+    "price": 325,
+    "code": "kac",
+    "desc": "A big Camioneta toy",
+    "status": true,
+    "stock": 10,
+    "category": "toys",
+    "id": 6
+  },
+  {
+    "title": "Camioneta",
+    "price": 325,
+    "code": "kas",
+    "desc": "A big Camioneta toy",
+    "status": true,
+    "stock": 10,
+    "category": "toys",
+    "id": 7
+  }
+]
