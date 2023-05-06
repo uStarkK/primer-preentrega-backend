@@ -9,7 +9,7 @@ export const cartRouter = express.Router();
 
 
 cartRouter.get("/", async (req, res, next) =>{
-    res.status(200).json(carts.getAll())
+    res.status(200).json(await carts.getAll())
 })
 
 
