@@ -15,7 +15,7 @@ app.get("/", (req, res, next) =>{
     res.status(200).json({message:"Yes, server's up and running"})
 })
 app.use("/api/products", productsRouter)
-app.use("/api/cart", cartRouter)
+app.use("/api/carts", cartRouter)
 
 app.get("*", (req, res, next) => {
     res.status(404).json({ status: "error", msg: "Route not found", data: {} })

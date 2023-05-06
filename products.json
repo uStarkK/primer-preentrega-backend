@@ -11,13 +11,6 @@
         "category": "clothes"
     },
     {
-        "title": "Camiseta",
-        "price": 30,
-        "thumbnail": "url.com/url",
-        "code": "aac",
-        "id": 2
-    },
-    {
         "title": "Esponja",
         "price": 320,
         "thumbnail": "url.com/url",

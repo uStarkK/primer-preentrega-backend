@@ -13,7 +13,12 @@ productsRouter.get("/", async (req, res, next) => {
         const limitedData = limit ? data.slice(0, limit) : data
         res.status(200).json(limitedData)
     } catch (err) {
-        throw new Error(err)
+        if (err instanceof Error) {
+            res.status(400).json({ error: 'Invalid input' });
+        } else {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 })
 
@@ -25,7 +30,12 @@ productsRouter.get("/:pid", async (req, res, next) => {
         const filteredData = await products.getProductByid(id)
         res.status(200).json(filteredData)
     } catch (err) {
-        throw new Error(err)
+        if (err instanceof Error) {
+            res.status(400).json({ error: 'Invalid input' });
+        } else {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 })
 
@@ -41,7 +51,7 @@ productsRouter.post("/", async (req, res, next) => {
                 msg: "Error. A product with the same code you are trying to save already exists. Please try again"
             })
         }
-        const requiredField = ['title', 'desc', 'code', 'price','stock', 'category']
+        const requiredField = ['title', 'desc', 'code', 'price', 'stock', 'category']
         const hasAllFields = requiredField.every(prop => newProduct[prop]);
         if (newProduct.id == undefined && hasAllFields) {
             await products.saveProduct({ ...newProduct, status: true })
@@ -49,16 +59,22 @@ productsRouter.post("/", async (req, res, next) => {
                 status: "Success",
                 msg: "product saved",
                 data: newProduct
-            })} else{
-                return res.status(409).json({
-                    status: "Error",
-                    msg: "An error occurred while trying to save the product. Check that all required fields are filled out and you are not trying to manually give an id"
-                })
-            }
-        }catch (err) {
-            throw new Error(err)
+            })
+        } else {
+            return res.status(409).json({
+                status: "Error",
+                msg: "An error occurred while trying to save the product. Check that all required fields are filled out and you are not manually giving an id"
+            })
         }
-    })
+    } catch (err) {
+        if (err instanceof Error) {
+            res.status(400).json({ error: 'Invalid input' });
+        } else {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+})
 
 
 
@@ -69,23 +85,37 @@ productsRouter.put("/:pid", async (req, res, next) => {
         let updatedProduct = req.body;
         await products.updateProduct(id, updatedProduct);
     } catch (err) {
-        throw new Error(err)
+        if (err instanceof Error) {
+            res.status(400).json({ error: 'Invalid input' });
+        } else {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+})
+
+
+productsRouter.delete("/:pid", async (req, res, next) => {
+    try {
+        const data = await products.getAll();
+        const id = req.params.pid;
+        await products.deleteProduct(id)
+        return res.status(204).json()
+    } catch {
+        if (err instanceof Error) {
+            res.status(400).json({ error: 'Invalid input' });
+        } else {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }
 })
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+productsRouter.get("*", (req, res, next) => {
+    res.status(404).json({ status: "error", msg: "Route not found", data: {} })
+})
 
 
 
